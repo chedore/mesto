@@ -1,3 +1,18 @@
+/*425px --> ~px*/
 .header {
-  
+  margin:  0 200px;
+  z-index: auto;
+  max-height: 74px;
+  max-width: 880px;
+  width: calc(100% - 2*200px);
+}
+
+/*320px --> 425px*/
+@media screen and (max-width: 425px) {
+  .header {
+    margin:  0 27px;
+    max-height: 56px;
+    max-width: 320px;
+    width: calc(100% - 2*27px);
+  }
 }

@@ -1,0 +1,13 @@
+/*425px --> ~px*/
+.logo {
+  max-height: 33px;
+  max-width: 142px;
+}
+
+/*320px --> 425px*/
+@media screen and (max-width: 425px) {
+  .logo {
+    max-height: 25px;
+    max-width: 104px;
+  }
+}
