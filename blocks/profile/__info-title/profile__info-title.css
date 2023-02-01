@@ -1,0 +1,20 @@
+/*768px --> max_px*/
+.profile__info-title {
+  margin: 0;
+  font-style: normal;
+  text-align: center;
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 500;
+  max-width: 294px;
+}
+
+/*min_px --> 768px*/
+@media screen and (max-width: 768px) {
+  .profile__info-title {
+    font-size: 27px;
+    line-height: 33px;
+    max-width: 198px;
+    padding: 26px 0 0;
+  }
+}
