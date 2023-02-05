@@ -1,0 +1,20 @@
+/*768px --> max_px*/
+.popup__close-button {
+  width: 32px;
+  height: 32px;
+  background: rgb(0,0,0, 0) url(../../../images/close_icon.svg) no-repeat top 50% left 50%;
+  border: none;
+  position: absolute;
+  top: -35px;
+  right: -35px;
+}
+
+/*min_px --> 768px*/
+@media screen and (max-width: 768px) {
+  .popup__close-button {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}

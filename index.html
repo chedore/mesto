@@ -25,25 +25,35 @@
             <h1 class="profile__info-title">Жак-Ив Кусто</h1>
             <p class="profile__info-subtitle">Исследователь океана</p>
           </div>
-          <button class="button button_place_profile__info profile__edit-button"></button>
+          <button class="button button_place_profile__info profile__edit-button" type="button"></button>
         </div>
-        <button class="button button_place_profile profile__add-button"></button>
+        <button class="button button_place_profile profile__add-button" type="button"></button>
       </section>
 
-      <section class="elements">
-          <!-- <figure class="element">
-            <img src="./images/baikal.png" alt="" class="element__image">
-            <div class="element__info">
-              <h2 class="element__info-title">Байкал</h2>
-              <button class="button button_place_element element__info-button"></button>
-            </div>
-          </figure> -->
-      </section>
+      <section class="elements"></section>
 
     </main>
 
-    <footer class="footer"></footer>
+    <footer class="footer">
+      <p class="footer__description">&#169; 2020 Mesto Russia</p>
+    </footer>
+
+    <div class="popup popup_place_profile">
+      <div class="popup__container">
+        <button class="button button_place_popup popup__close-button"type="button"></button>
+        <h2 class="popup__container-title">Редактировать профиль</h2>
+          <form class="popup__form" name="form-profile">
+            <input type="text" class="popup__input popup__input_type_name" placeholder="Укажите имя" name="popup-name">
+            <input type="text" class="popup__input popup__input_type_job" placeholder="Укажите профессию" name="popup-job">
+            <button class="button button_place_popup popup__save-button" type="submit">Сохранить</button>
+          </form>
+
+      </div>
+
+    </div>
+
     <script src="./scripts/elements.js"></script>
-    
+    <script src="./scripts/index.js"></script>
+
   </body>  
 </html>
