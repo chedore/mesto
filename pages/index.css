@@ -10,7 +10,7 @@
 
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/_place_profile/button_place_profile.css);
-@import url(../blocks/button/_place_profile/__info/button_place_profile__info.css);
+@import url(../blocks/button/_place_profile-info/button_place_profile-info.css);
 @import url(../blocks/button/_place_element/button_place_element.css);
 @import url(../blocks/button/_place_popup/button_place_popup.css);
 
