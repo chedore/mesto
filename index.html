@@ -14,7 +14,6 @@
 
     <header class="header">
       <img class="logo logo_place_header" src="./images/logo.svg" alt="Логотип">
-      <div class="line"></div>
     </header>
     
     <main class="main">
@@ -88,11 +87,11 @@
 
     <div class="popup popup_place_profile">
       <div class="popup__container">
-        <button class="button button_place_popup popup__close-button" type="button"></button>
+        <button class="button button_place_popup popup__close-button" type="button" aria-label="close"></button>
         <h2 class="popup__container-title">Редактировать профиль</h2>
           <form class="popup__form" name="form-profile">
-            <input type="text" class="popup__input popup__input_type_name" placeholder="Укажите имя" name="popup-name">
-            <input type="text" class="popup__input popup__input_type_job" placeholder="Укажите профессию" name="popup-job">
+            <input type="text" class="popup__input popup__input_type_name" placeholder="Укажите имя" name="popup-name" required>
+            <input type="text" class="popup__input popup__input_type_job" placeholder="Укажите профессию" name="popup-job" required>
             <button class="button button_place_popup popup__save-button" type="submit">Сохранить</button>
           </form>
 

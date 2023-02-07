@@ -19,6 +19,7 @@
 
 ## Полезный материал 
 Именование директорий по БЭМ https://ru.bem.info/methodology/filestructure/#nested 
+Цвет - https://www.webfx.com/web-design/hex-to-rgb/
 
 Фотографии можно брать не из макета, а с сайта https://unsplash.com — это коллекция бесплатных фотографий, которые можно использовать, не беспокоясь об авторских правах.
 
