@@ -17,7 +17,8 @@
 - [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-4.pdf)
 
 
-**Картинки**
+## Полезный материал 
+Именование директорий по БЭМ https://ru.bem.info/methodology/filestructure/#nested 
 
 Фотографии можно брать не из макета, а с сайта https://unsplash.com — это коллекция бесплатных фотографий, которые можно использовать, не беспокоясь об авторских правах.
 

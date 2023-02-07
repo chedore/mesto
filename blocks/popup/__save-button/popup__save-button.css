@@ -4,12 +4,13 @@
   color: #ffffff;
   border: none;
   border-radius: 2px;
-  margin: 0;
+
   padding: 14px 0 18px 0;
   font-style: normal;
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
+  margin: 18px 0 0 0;
 }
 
 
@@ -19,5 +20,6 @@
     font-size: 14px;
     line-height: 17px;
     padding: 14px 0 14px 0;
+    margin: 15px 0 0 0;
   }
 }

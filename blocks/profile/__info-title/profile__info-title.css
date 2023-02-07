@@ -1,12 +1,14 @@
 /*768px --> max_px*/
 .profile__info-title {
   margin: 0;
-  font-style: normal;
-  text-align: center;
+  font-weight: 500;
   font-size: 42px;
   line-height: 48px;
-  font-weight: 500;
+  padding-bottom: 16px;
+  text-overflow: ellipsis;
   max-width: 294px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /*min_px --> 768px*/
@@ -14,7 +16,7 @@
   .profile__info-title {
     font-size: 27px;
     line-height: 33px;
-    max-width: 198px;
-    padding: 23px 0 0;
+    padding-bottom: 5px;
+    max-width: 189px;
   }
 }
