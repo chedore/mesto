@@ -1,21 +1,12 @@
-/*320px --> ~px*/
 .element__info-title {
   margin: 0;
   font-style: normal;
-  text-align: center;
   font-size: 24px;
   line-height: 29px;
   font-weight: 900;
-  max-width: 246px;
+  max-width: 215px;
   color: #000000;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-}
-
-/*320px*/
-@media screen and (max-width: 320px) {
-  .element__info-title {
-    max-width: 215px;
-  }
 }
