@@ -3,9 +3,4 @@
   height: 19px;
   background: rgb(0,0,0, 0) url(../../../images/heart.svg) no-repeat top 50% left 50%;
   border: none;
-  cursor: pointer; 
 }
-
-/* .element__info-button:active {
-  background: rgb(0,0,0, 0) url(../../../images/black_heart.svg) no-repeat top 50% left 50%;
-} */

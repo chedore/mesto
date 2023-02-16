@@ -41,13 +41,18 @@ const addElements = (element) => {
   elementElement.querySelector('.element__image').alt = element.alt;
   elementElement.querySelector('.element__info-title').textContent = element.name;
 
+  /**поставиь лайк */
   elementElement.querySelector('.element__info-button').addEventListener('click', function (envent) {envent.target.classList.toggle('element__info-button-active');});
 
+  /**удалить карточку */
+  elementElement.querySelector('.element__basket').addEventListener('click', function (envent) {envent.target.closest('.element').remove();});
 
 
-  elementsContainer.append(elementElement)
+  /**добавить в контейнер */
+  elementsContainer.append(elementElement);
 }
 
 elementsValue.forEach((item) => {
   addElements(item)
 });
+
