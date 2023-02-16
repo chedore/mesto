@@ -1,13 +1,19 @@
 const profile = document.querySelector('.profile'); 
-const openButtonProfile = profile.querySelector('.profile__edit-button'); 
-const nameProfile = profile.querySelector('.profile__info-title');
-const jobProfile = profile.querySelector('.profile__info-subtitle');
-
 
 const popupProfile = document.querySelector('.popup_place_profile'); 
+const openButtonProfile = profile.querySelector('.profile__edit-button'); 
 const closeButtonProfile = popupProfile.querySelector('.popup__close-button');
-const nameInput = popupProfile.querySelector('.popup__input_type_name');
-const jobInput = popupProfile.querySelector('.popup__input_type_job');
+
+const popupElement = document.querySelector('.popup_add_element'); 
+const openButtonElement = profile.querySelector('.profile__add-button'); 
+const closeButtonElement = popupElement.querySelector('.popup__close-button');
+
+
+/** Все о попап - профиль */
+managingPopupProfile(popupProfile, openButtonProfile, closeButtonProfile);
+
+/** Все о попап - элемент */
+managingPopupElement(popupElement, openButtonElement, closeButtonElement);
 
 
 /**
@@ -27,21 +33,68 @@ const closePopup  = (popup) => {
   popup.classList.remove('popup_opened');
 };
 
+/**
+ * Управление попапом профиля
+ * 
+ * @param {object} popup ссылка на вызываемый попап
+ * @param {object} popupToOpen кнопка открыть и сохранить попап
+ * @param {object} popupToClose кнопка закрыть попап
+ */
+function managingPopupProfile (popup, popupToOpen, popupToClose){
+  const nameProfile = profile.querySelector('.profile__info-title');
+  const jobProfile = profile.querySelector('.profile__info-subtitle');
+  const nameInput = popup.querySelector('.popup__input_type_name');
+  const jobInput = popup.querySelector('.popup__input_type_job');
 
-/**Открыть попап профиля */
-openButtonProfile.addEventListener('click', () => {
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
-  openPopup(popupProfile);
-}); 
+  /**Открыть попап */
+  popupToOpen.addEventListener('click', () => {
+    nameInput.value = nameProfile.textContent;
+    jobInput.value = jobProfile.textContent;
+    openPopup(popup);
+  }); 
 
-/**Сохранить попап профиля */
-popupProfile.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  nameProfile.textContent = nameInput.value;
-  jobProfile.textContent = jobInput.value;
-  closePopup(popupProfile);
-}); 
+  /**Сохранить попап */
+  popup.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    nameProfile.textContent = nameInput.value;
+    jobProfile.textContent = jobInput.value;
+    closePopup(popup);
+  }); 
 
-/**Закрыть попап профиля */
-closeButtonProfile.addEventListener('click', () => closePopup(popupProfile)); 
+  /**Закрыть попап */
+  popupToClose.addEventListener('click', () => closePopup(popup)); 
+}
+
+/**
+ * Управление попапом элемента
+ * 
+ * @param {object} popup ссылка на вызываемый попап
+ * @param {object} popupToOpen кнопка открыть и сохранить попап
+ * @param {object} popupToClose кнопка закрыть попап
+ */
+function managingPopupElement (popup, popupToOpen, popupToClose){
+  const nameInput = popup.querySelector('.popup__input_type_name');
+  const urlInput = popup.querySelector('.popup__input_type_url');
+
+  /**Открыть попап */
+  popupToOpen.addEventListener('click', () => {
+    openPopup(popup);
+  }); 
+
+  /**Сохранить попап */
+  popup.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    /**Создаем карточку */
+    addElements(urlInput.value, nameInput.value, nameInput.value);
+
+    nameInput.value = ""
+    urlInput.value = ""
+
+    closePopup(popup);
+  }); 
+
+  /**Закрыть попап */
+  popupToClose.addEventListener('click', () => closePopup(popup)); 
+}
+
+
