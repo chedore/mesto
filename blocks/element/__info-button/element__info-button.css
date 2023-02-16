@@ -6,6 +6,6 @@
   cursor: pointer; 
 }
 
-.element__info-button:active {
+/* .element__info-button:active {
   background: rgb(0,0,0, 0) url(../../../images/black_heart.svg) no-repeat top 50% left 50%;
-}
+} */
