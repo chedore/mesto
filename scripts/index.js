@@ -8,12 +8,18 @@ const popupElement = document.querySelector('.popup_add_element');
 const openButtonElement = profile.querySelector('.profile__add-button'); 
 const closeButtonElement = popupElement.querySelector('.popup__close-button');
 
+const popupImage = document.querySelector('.popup_type_image'); 
+const openButtonImage = document.querySelector('.elements'); 
+const closeButtonImage = popupImage.querySelector('.popup__close-button');
 
 /** Все о попап - профиль */
 managingPopupProfile(popupProfile, openButtonProfile, closeButtonProfile);
 
 /** Все о попап - элемент */
 managingPopupElement(popupElement, openButtonElement, closeButtonElement);
+
+/** Все о попап - картинка */
+managingPopupImage(popupImage, openButtonImage, closeButtonImage);
 
 
 /**
@@ -98,3 +104,28 @@ function managingPopupElement (popup, popupToOpen, popupToClose){
 }
 
 
+/**
+ * Управление попапом картинка
+ * 
+ * @param {object} popup ссылка на вызываемый попап
+ * @param {object} popupToOpen кнопка открыть попап
+ * @param {object} popupToClose кнопка закрыть попап
+ */
+function managingPopupImage (popup, popupToOpen, popupToClose){
+  
+  /**Открыть попап */
+  popupToOpen.addEventListener('click', (evt) => {
+    const imgInput = evt.target; 
+    const imgOutput = document.querySelector('.popup__img');
+    const nameOutput = document.querySelector('.popup__name');
+
+    imgOutput.src = imgInput.src;
+    imgOutput.alt = imgInput.alt;
+    nameOutput.textContent = evt.target.closest('.element').textContent;
+
+    openPopup(popup);
+  }); 
+
+  /**Закрыть попап */
+  popupToClose.addEventListener('click', () => closePopup(popup)); 
+}

@@ -47,6 +47,9 @@ const addElements = (imgValue = "", altValue = "", nameValue = "") => {
   /**удалить карточку */
   elementElement.querySelector('.element__basket').addEventListener('click', function (envent) {envent.target.closest('.element').remove();});
 
+  /**попап карточки */
+  // elementElement.querySelector('.element__image').addEventListener('click', function (envent) {console.log('111');});
+
 
   /**добавить в контейнер */
   elementsContainer.prepend(elementElement);
