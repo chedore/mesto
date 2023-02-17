@@ -115,15 +115,17 @@ function managingPopupImage (popup, popupToOpen, popupToClose){
   
   /**Открыть попап */
   popupToOpen.addEventListener('click', (evt) => {
-    const imgInput = evt.target; 
-    const imgOutput = document.querySelector('.popup__img');
-    const nameOutput = document.querySelector('.popup__name');
+    if((!evt.target.src & !evt.target.alt) === 0) {
+      const imgInput = evt.target; 
+      const imgOutput = document.querySelector('.popup__img');
+      const nameOutput = document.querySelector('.popup__name');
 
-    imgOutput.src = imgInput.src;
-    imgOutput.alt = imgInput.alt;
-    nameOutput.textContent = evt.target.closest('.element').textContent;
+      imgOutput.src = imgInput.src;
+      imgOutput.alt = imgInput.alt;
+      nameOutput.textContent = evt.target.closest('.element').textContent;
 
-    openPopup(popup);
+      openPopup(popup);
+    }
   }); 
 
   /**Закрыть попап */
