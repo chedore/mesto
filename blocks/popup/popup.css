@@ -9,7 +9,7 @@
   left: 0;
   background: rgba(0, 0, 0, 0.5);
   color: #000000;
-  transition: visibility 0.1s, opacity 0.9s ease-in-out;
+  transition: visibility 0.1s, opacity 0.2s ease-in-out;
   visibility: hidden;
   display: flex;
   opacity: 0;

@@ -30,28 +30,3 @@ const elementsValue = [
     alt: 'Байкал'
   }
 ]
-
-let elementsContainer = document.querySelector('.elements')
-
-/** Создать карточки */
-const addElements = (imgValue = "", altValue = "", nameValue = "") => {
-  const elementTemplate = document.querySelector('#element-template').content;
-  const elementElement = elementTemplate.querySelector('.element').cloneNode(true);
-  elementElement.querySelector('.element__image').src = imgValue;
-  elementElement.querySelector('.element__image').alt = altValue;
-  elementElement.querySelector('.element__info-title').textContent = nameValue;
-
-  /**поставиь лайк */
-  elementElement.querySelector('.element__info-button').addEventListener('click', function (envent) {envent.target.classList.toggle('element__info-button-active');});
-
-  /**удалить карточку */
-  elementElement.querySelector('.element__basket').addEventListener('click', function (envent) {envent.target.closest('.element').remove();});
-
-  /**добавить в контейнер */
-  elementsContainer.prepend(elementElement);
-}
-
-elementsValue.forEach((item) => {
-  addElements(item.img, item.alt, item.name)
-});
-
