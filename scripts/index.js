@@ -2,7 +2,7 @@
 const cardsContainer = document.querySelector('.elements')                    // контейнер 
 const cardTemplate = document.querySelector('#element-template').content;     // шаблон
 const cardPopup = document.querySelector('.popup_add_element');               // попап
-const openButtonСard = profile.querySelector('.profile__add-button');         // кнопка сохранить
+const openButtonСard = document.querySelector('.profile__add-button');         // кнопка сохранить
 
 /* ПРОФИЛЬ */
 const profile = document.querySelector('.profile');                           // блок profile
@@ -22,6 +22,14 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
+/** Открыть попап для картинки */
+const handleCardClick = (imgValue, altValue, nameValue) => {
+  popupImageImg.src = imgValue;
+  popupImageImg.alt = altValue;
+  popupImageName.textContent = nameValue;
+  openPopup(popupImage);
+}
+
 /** Создать 1-карточку */
 function createCard(imgValue, altValue, nameValue) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
@@ -29,35 +37,24 @@ function createCard(imgValue, altValue, nameValue) {
   cardImg.src = imgValue;
   cardImg.alt = altValue;
   cardElement.querySelector('.element__info-title').textContent = nameValue;
-return cardElement;
-}
-
-/** Открыть попап для картинки */
-const openImgCard = (envent) => {
-  const cardElement = envent.target.closest('.element');
-  const imgInput = cardElement.querySelector('.element__image');
-  const nameInput = cardElement.querySelector('.element__info-title');
-
-  popupImageImg.src = imgInput.src;
-  popupImageImg.alt = imgInput.alt;
-  popupImageName.textContent = nameInput.textContent;
-  openPopup(popupImage);
-}
-
-/** Создать карточки и добавить в контейнер*/
-const addElements = (imgValue = "", altValue = "", nameValue = "") => {
-  const cardElement = createCard(imgValue, altValue, nameValue);
 
   /**поставиь лайк */
   cardElement.querySelector('.element__info-button').addEventListener('click', function (envent) {envent.target.classList.toggle('element__info-button-active');});
 
   /**удалить карточку */
   cardElement.querySelector('.element__basket').addEventListener('click', function (envent) {envent.target.closest('.element').remove();});
+  
+  /**открыть картинку */
+  cardImg.addEventListener('click', () => handleCardClick(imgValue, altValue, nameValue));
 
-  cardElement.querySelector('.element__image').addEventListener('click', function (envent) {
-    openImgCard(envent); 
-  });
+  return cardElement;
+}
 
+
+
+/** Создать карточки и добавить в контейнер*/
+const addElements = (imgValue = "", altValue = "", nameValue = "") => {
+  const cardElement = createCard(imgValue, altValue, nameValue);
   /**добавить в контейнер */
   cardsContainer.prepend(cardElement);
 }
@@ -73,7 +70,7 @@ elementsValue.forEach((item) => {
 managePopupProfile(profilePopup, openButtonProfile);
 
 /** Все о попап - элемент */
-managecardPopup(cardPopup, openButtonСard);
+manageCardPopup(cardPopup, openButtonСard);
 
 
 /**
@@ -106,7 +103,7 @@ function managePopupProfile (popup, openButton){
   const jobProfile = profile.querySelector('.profile__info-subtitle');
   const nameInput = popup.querySelector('.popup__input_type_name');
   const jobInput = popup.querySelector('.popup__input_type_job');
-  const form = popup.querySelector('form');
+  const profileForm = document.forms['profile'];
 
   /**Открыть попап */
   openButton.addEventListener('click', () => {
@@ -116,7 +113,7 @@ function managePopupProfile (popup, openButton){
   }); 
 
   /**Сохранить попап */
-  form.addEventListener('submit', (evt) => {
+  profileForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     nameProfile.textContent = nameInput.value;
     jobProfile.textContent = jobInput.value;
@@ -130,10 +127,10 @@ function managePopupProfile (popup, openButton){
  * @param {object} popup ссылка на вызываемый попап
  * @param {object} openButton кнопка открыть
  */
-function managecardPopup (popup, openButton){
+function manageCardPopup (popup, openButton){
   const nameInput = popup.querySelector('.popup__input_type_name');
   const urlInput = popup.querySelector('.popup__input_type_url');
-  const form = popup.querySelector('form');
+  const cardForm = document.forms['card'];
 
   /**Открыть попап */
   openButton.addEventListener('click', () => {
@@ -141,7 +138,7 @@ function managecardPopup (popup, openButton){
   }); 
 
   /**Сохранить попап */
-  form.addEventListener('submit', (evt) => {
+  cardForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     /**Создаем карточку */
     addElements(urlInput.value, nameInput.value, nameInput.value);
