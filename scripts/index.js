@@ -1,4 +1,5 @@
 /* КАРТОЧКИ */
+
 const cardsContainer = document.querySelector('.elements')                    // контейнер 
 const cardTemplate = document.querySelector('#element-template').content;     // шаблон
 const cardPopup = document.querySelector('.popup_add_element');               // попап
@@ -15,12 +16,76 @@ const popupImage = document.querySelector('.popup_type_image');               //
 const popupImageImg = popupImage.querySelector('.popup__img');                // попап элемент image
 const popupImageName = popupImage.querySelector('.popup__name');              // попап элемент name
 
-// Находим все крестики проекта по универсальному селектору
-const closeButtons = document.querySelectorAll('.popup__close');
-closeButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
+/** Список всех popup */
+const popupList = document.querySelectorAll('.popup'); 
+
+/**
+ * 
+ * @param {object} popup открыть попап
+ */
+const openPopup = (popup) => { 
+  popup.classList.add('popup_opened'); 
+  document.addEventListener('keydown', setKeydownListenerClosePopup);
+};
+
+/**
+ * 
+ * @param {object} popup закрыть попап
+ */
+const closePopup  = (popup) => { 
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', setKeydownListenerClosePopup);
+};
+
+
+/**
+ * Функция обработки события.
+ * - закрытие попапа кликом на оверлей;
+ * - закрытие попапа клипом на крестик.
+ * 
+ * @param {*} evt 
+ */
+const setEventListenerClosePopup = (evt) => {
+  if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close")) {
+    closePopup(evt.target.closest('.popup'));
+  }
+};
+
+
+/**
+ * Функция обработки события.
+ * - закрытие попапа нажатием на Esc.
+ * 
+ * @param {*} evt 
+ */
+const setKeydownListenerClosePopup = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  };
+};
+
+
+popupList.forEach((popup) => {
+  popup.addEventListener('click', setEventListenerClosePopup);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** Открыть попап для картинки */
 const handleCardClick = (imgValue, altValue, nameValue) => {
@@ -73,22 +138,7 @@ managePopupProfile(profilePopup, openButtonProfile);
 manageCardPopup(cardPopup, openButtonСard);
 
 
-/**
- * 
- * @param {object} popup открыть попап
- */
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-};
 
-
-/**
- * 
- * @param {object} popup закрыть попап
- */
-const closePopup  = (popup) => {
-  popup.classList.remove('popup_opened');
-};
 
 
 
@@ -137,13 +187,14 @@ function manageCardPopup (popup, openButton){
     openPopup(popup);
   }); 
 
-  /**Сохранить попап */
-  cardForm.addEventListener('submit', (evt) => {
+  const saveCardForm = (evt) => {
     evt.preventDefault();
-    /**Создаем карточку */
-    addElements(urlInput.value, nameInput.value, nameInput.value);
+    addElements(urlInput.value, nameInput.value, nameInput.value); /**Создаем карточку */
     evt.target.reset();
 
     closePopup(popup);
-  }); 
+  };
+
+  /**Сохранить попап */
+  cardForm.addEventListener('submit', saveCardForm); 
 }

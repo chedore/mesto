@@ -18,6 +18,7 @@
 
 - [Чеклист ПР4](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-4.pdf);
 - [Чеклист ПР5](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-5.pdf);
+- [Чеклист ПР6](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-6.pdf);
 
 - Плавное открытие и закрытие попапов.
 
