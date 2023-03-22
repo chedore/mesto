@@ -41,10 +41,12 @@
       <div class="popup__container">
         <button class="button button_place_popup popup__close" type="button" aria-label="close"></button>
         <h2 class="popup__container-title">Редактировать профиль</h2>
-          <form class="popup__form" name="profile">
-            <input type="text" class="popup__input popup__input_type_name" placeholder="Укажите имя" name="popup-name" required>
-            <input type="text" class="popup__input popup__input_type_job" placeholder="Укажите профессию" name="popup-job" required>
-            <button class="button button_place_popup popup__save-button" type="submit">Сохранить</button>
+          <form class="form" name="profile" novalidate>
+            <input type="text" id="name-input" class="form__input form__input_type_name" placeholder="Укажите имя" name="name" required minlength="2" maxlength="40">
+            <span class="name-input-error form__error"></span>
+            <input type="text" id="job-input" class="form__input form__input_type_job" placeholder="Укажите профессию" name="job" required minlength="2" maxlength="200">
+            <span class="job-input-error form__error"></span>
+            <button type="submit" class="button_place_popup popup__save-button" disabled="0">Сохранить</button>
           </form>
       </div>
     </div>
@@ -53,10 +55,12 @@
       <div class="popup__container">
         <button class="button button_place_popup popup__close" type="button" aria-label="close"></button>
         <h2 class="popup__container-title">Новое место</h2>
-          <form class="popup__form" name="card">
-            <input type="text" class="popup__input popup__input_type_name" placeholder="Название" name="popup-name" required>
-            <input type="text" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" name="popup-url" required>
-            <button class="button button_place_popup popup__save-button" type="submit">Содать</button>
+          <form class="form" name="card" novalidate>
+            <input type="text" id="title-input" class="form__input form__input_type_name" placeholder="Название" name="title" required minlength="2" maxlength="30">
+            <span class="title-input-error form__error"></span>
+            <input type="url" id="email-input" class="form__input form__input_type_url" placeholder="Ссылка на картинку" name="url" required>
+            <span class="email-input-error form__error"></span>
+            <button type="submit" class="button_place_popup popup__save-button" disabled="0">Содать</button>
           </form>
       </div>
     </div>
@@ -82,6 +86,7 @@
     </template>
 
     <script src="./scripts/elements.js"></script>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
     
 
