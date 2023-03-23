@@ -24,8 +24,7 @@ const popupList = document.querySelectorAll('.popup');
  */
 const openPopup = (popup) => { 
   popup.classList.add('popup_opened'); 
-  document.addEventListener('keydown', setKeydownListenerClosePopup);
-  disableSubmitButton(true, popup.querySelector('.popup__save-button')); // сделай кнопку неактивной
+  document.addEventListener('keydown', handleClosePopupKeydown);
 };
 
 /**
@@ -34,21 +33,33 @@ const openPopup = (popup) => {
  */
 const closePopup  = (popup) => { 
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', setKeydownListenerClosePopup);
-  resetFormInputs(popup);
+  document.removeEventListener('keydown', handleClosePopupKeydown);
 };
 
 /**
  * 
- * @param {*} popup обнулить все инпут поля у закрываемого попап
+ * @param {*} popup сброс всех полей у попап
  */
-const resetFormInputs = (popup) => {
-  const formElement = popup.querySelector('.form'); 
-  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+const resetValidationStyle = (popup) => {
+  const config = formValidationConfig;
+  disableSubmitButton(true, popup.querySelector(config.submitButtonSelector), config); // сделай кнопку неактивной
+  resetFormInputs(popup, config); // очистить все инпуты
+};
+
+
+
+/**
+ * 
+ * @param {*} popup сброс все инпут полей у попап 
+ * @param {*} config конфиг для валидации, переменная formValidationConfig
+ */
+const resetFormInputs = (popup, config) => {
+  const formElement = popup.querySelector(config.formSelector); 
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
 
   formElement.reset();// очищаем инпут поля
   inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement); // очищаем от ошибок валидации
+    hideInputError(formElement, inputElement, config); // очищаем от ошибок валидации
   });
 }
 
@@ -59,7 +70,7 @@ const resetFormInputs = (popup) => {
  * 
  * @param {*} evt 
  */
-const setEventListenerClosePopup = (evt) => {
+const handleClosePopupClick = (evt) => {
   if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close")) {
     closePopup(evt.target.closest('.popup'));
   }
@@ -72,7 +83,7 @@ const setEventListenerClosePopup = (evt) => {
  * 
  * @param {*} evt 
  */
-const setKeydownListenerClosePopup = (evt) => {
+const handleClosePopupKeydown = (evt) => {
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
   };
@@ -80,7 +91,7 @@ const setKeydownListenerClosePopup = (evt) => {
 
 
 popupList.forEach((popup) => {
-  popup.addEventListener('click', setEventListenerClosePopup);
+  popup.addEventListener('click', handleClosePopupClick);
 });
 
 
@@ -132,15 +143,6 @@ elementsValue.forEach((item) => {
 });
 
 
- 
-/** Все о попап - профиль */
-managePopupProfile(profilePopup, openButtonProfile);
-
-/** Все о попап - элемент */
-manageCardPopup(cardPopup, openButtonСard);
-
-
-
 /**
  * Управление попапом профиля. Позволяет зонировать функцию.
  * 
@@ -150,12 +152,13 @@ manageCardPopup(cardPopup, openButtonСard);
 function managePopupProfile (popup, openButton) {
   const nameProfile = profile.querySelector('.profile__info-title');
   const jobProfile = profile.querySelector('.profile__info-subtitle');
-  const nameInput = popup.querySelector('.form__input_type_name');
-  const jobInput = popup.querySelector('.form__input_type_job');
+  const nameInput = popup.querySelector('.popup__input_type_name');
+  const jobInput = popup.querySelector('.popup__input_type_job');
   const profileForm = document.forms['profile'];
 
   /**Открыть попап */
   openButton.addEventListener('click', () => {
+    resetValidationStyle(popup);
     nameInput.value = nameProfile.textContent;
     jobInput.value = jobProfile.textContent;
     openPopup(popup);
@@ -179,12 +182,15 @@ function managePopupProfile (popup, openButton) {
  * @param {object} openButton кнопка открыть
  */
 function manageCardPopup (popup, openButton){
-  const nameInput = popup.querySelector('.form__input_type_name');
-  const urlInput = popup.querySelector('.form__input_type_url');
+  const nameInput = popup.querySelector('.popup__input_type_name');
+  const urlInput = popup.querySelector('.popup__input_type_url');
   const cardForm = document.forms['card'];
 
   /**Открыть попап */
-  openButton.addEventListener('click', () => {openPopup(popup); }); 
+  openButton.addEventListener('click', () => {
+    resetValidationStyle(popup);
+    openPopup(popup); 
+  }); 
 
   const saveCardForm = (evt) => {
     evt.preventDefault();
@@ -195,3 +201,9 @@ function manageCardPopup (popup, openButton){
   /**Сохранить попап */
   cardForm.addEventListener('submit', saveCardForm); 
 }
+
+/** Все о попап - профиль */
+managePopupProfile(profilePopup, openButtonProfile);
+
+/** Все о попап - элемент */
+manageCardPopup(cardPopup, openButtonСard);
