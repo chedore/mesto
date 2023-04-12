@@ -1,4 +1,4 @@
-const elementsValue = [
+export const elementsValue = [
   {
     name: 'Республика Алтай',
     img: './images/altai.jpg',

@@ -1,5 +1,5 @@
 /* КАРТОЧКИ */
-const cardsContainer = document.querySelector('.elements')                    // контейнер 
+export const cardsContainer = document.querySelector('.elements')                    // контейнер 
 const cardTemplate = document.querySelector('#element-template').content;     // шаблон
 const cardPopup = document.querySelector('.popup_add_element');               // попап
 const openButtonСard = document.querySelector('.profile__add-button');         // кнопка сохранить
@@ -95,52 +95,52 @@ popupList.forEach((popup) => {
 });
 
 
-/** Открыть попап для картинки */
-const handleCardClick = (image) => {
-  popupImageImg.src = image.img;
-  popupImageImg.alt = image.alt;
-  popupImageName.textContent = image.name;
-  openPopup(popupImage);
-}
+// /** Открыть попап для картинки */
+// const handleCardClick = (image) => {
+//   popupImageImg.src = image.img;
+//   popupImageImg.alt = image.alt;
+//   popupImageName.textContent = image.name;
+//   openPopup(popupImage);
+// }
 
-/** Создать 1-карточку */
-const createCard = (imgValue, altValue, nameValue) => {
-  /** Объект с данными о карточке */
-  const image = {
-    img: imgValue || '',
-    alt: altValue || '',
-    name: nameValue || ''
-  };
+// /** Создать 1-карточку */
+// const createCard = (imgValue, altValue, nameValue) => {
+//   /** Объект с данными о карточке */
+//   const image = {
+//     img: imgValue || '',
+//     alt: altValue || '',
+//     name: nameValue || ''
+//   };
 
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  const cardImg = cardElement.querySelector('.element__image');
-  cardImg.src = image.img;
-  cardImg.alt = image.alt;
-  cardElement.querySelector('.element__info-title').textContent = image.name;
+//   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+//   const cardImg = cardElement.querySelector('.element__image');
+//   cardImg.src = image.img;
+//   cardImg.alt = image.alt;
+//   cardElement.querySelector('.element__info-title').textContent = image.name;
 
-  /**поставиь лайк */
-  cardElement.querySelector('.element__info-button').addEventListener('click', (evt) => { evt.target.classList.toggle('element__info-button-active');});
+//   /**поставиь лайк */
+//   cardElement.querySelector('.element__info-button').addEventListener('click', (evt) => { evt.target.classList.toggle('element__info-button-active');});
 
-  /**удалить карточку */
-  cardElement.querySelector('.element__basket').addEventListener('click', (evt) => { evt.target.closest('.element').remove();});
+//   /**удалить карточку */
+//   cardElement.querySelector('.element__basket').addEventListener('click', (evt) => { evt.target.closest('.element').remove();});
   
-  /**открыть картинку */
-  cardImg.addEventListener('click', () => handleCardClick(image));
+//   /**открыть картинку */
+//   cardImg.addEventListener('click', () => handleCardClick(image));
 
-  return cardElement;
-}
+//   return cardElement;
+// }
 
-/** Создать карточки и добавить в контейнер*/
-const addElements = (imgValue, altValue, nameValue) => {
-  const cardElement = createCard(imgValue, altValue, nameValue);
-  /**добавить в контейнер */
-  cardsContainer.prepend(cardElement);
-}
+// /** Создать карточки и добавить в контейнер*/
+// const addElements = (imgValue, altValue, nameValue) => {
+//   const cardElement = createCard(imgValue, altValue, nameValue);
+//   /**добавить в контейнер */
+//   cardsContainer.prepend(cardElement);
+// }
 
-// Создаем карточки
-elementsValue.forEach((item) => {
-  addElements(item.img, item.alt, item.name)
-});
+// // Создаем карточки
+// elementsValue.forEach((item) => {
+//   addElements(item.img, item.alt, item.name)
+// });
 
 
 /**
