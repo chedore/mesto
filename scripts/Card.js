@@ -1,12 +1,11 @@
-import {elementsValue} from './elements.js'
-import {cardsContainer, popupImageImg, popupImageName, openPopup, popupImage} from './index.js'
-
-class Card {
-  constructor(data, templateSelector) {
+export class Card {
+  constructor(data, templateSelector, handleCardClick) {
     this._src = data.img || '';
     this._alt = data.alt || '';
     this._name = data.name || '';
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
+    
   }
   _getTemplate() {
     const cardElement = document
@@ -19,14 +18,17 @@ class Card {
   /** Создать 1-карточку */
   generateCard() {
     this._element = this._getTemplate();
-    const cardImg = this._element.querySelector('.element__image');
+    this._cardImage = this._element.querySelector('.element__image');
+    this._likeButton = this._element.querySelector('.element__info-button');
+    this._basketButton = this._element.querySelector('.element__basket');
+    this._cardButton = this._element.querySelector('.element__image');
 
     this._setEventListeners(); //слушатель событий
 
     //Добавим данные
 
-    cardImg.src = this._src;
-    cardImg.alt = this._alt;
+    this._cardImage.src = this._src;
+    this._cardImage.alt = this._alt;
     this._element.querySelector('.element__info-title').textContent = this._name;
 
     return this._element;
@@ -34,48 +36,30 @@ class Card {
 
   /**поставиь лайк */
   _handleLikeClick() {
-    this._element.querySelector('.element__info-button').classList.toggle('element__info-button-active');
+    this._likeButton.classList.toggle('element__info-button-active');
   }
 
   /**удалить карточку */
   _handleBasketClick() {
     this._element.remove()
   }
-
-  /** Открыть попап для картинки */
-  _handleCardClick() {
-    popupImageImg.src = this._src;
-    popupImageImg.alt = this._alt;
-    popupImageName.textContent = this._name;
-    openPopup(popupImage);
-  }
-
+  
   _setEventListeners() {
     /**поставиь лайк */
-    this._element.querySelector('.element__info-button').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeClick();
     });
 
     /**удалить карточку */
-    this._element.querySelector('.element__basket').addEventListener('click', () => {
+    this._basketButton.addEventListener('click', () => {
       this._handleBasketClick();
     });
 
     /**открыть картинку */
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleCardClick();
+    this._cardButton.addEventListener('click', () => {
+      this._handleCardClick(
+          {name: this._name, link: this._src}
+        );
     });
   }
 }
-
-export const addElements = (data) => {
-  const card = new Card(data, '#element-template');
-  const cardElement = card.generateCard();
-  /**добавить в контейнер */
-  cardsContainer.prepend(cardElement);
-}
-
-// Создаем карточки
-elementsValue.forEach((item) => {
-  addElements(item);
-});

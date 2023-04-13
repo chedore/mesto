@@ -18,7 +18,8 @@ export const popupImageName = popupImage.querySelector('.popup__name');         
 const popupList = document.querySelectorAll('.popup'); 
 
 import {formValidationConfig, FormValidator} from './FormValidator.js'
-import { addElements } from './Card.js';
+import {Card} from './Card.js';
+import {elementsValue} from './elements.js'
 
 
 /**
@@ -44,9 +45,8 @@ const closePopup  = (popup) => {
  * @param {*} popup сброс всех полей у попап
  */
 const resetValidationStyle = (popup) => {
-  const formElement = popup.querySelector(formValidationConfig.formSelector); 
-  const validation = new FormValidator(formElement, formValidationConfig);
-  validation.clearValidation()
+  const profileForm = popup.querySelector(formValidationConfig.formSelector); 
+  formValidators[profileForm.getAttribute('name')].clearValidation();
 };
 
 
@@ -155,3 +155,53 @@ managePopupProfile(profilePopup, openButtonProfile);
 
 /** Все о попап - элемент */
 manageCardPopup(cardPopup, openButtonСard);
+
+
+const formValidators = {}
+
+/**
+ * Функция выбирает все формы с указанным классом в DOM.
+ * Для каждой формы вызовем функцию enableValidationList.
+ * 
+ */
+const enableValidationList = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  
+  formList.forEach((formElement) => {
+    // setEventListeners(formElement, config);
+    const validator = new FormValidator(formElement, config);
+
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name')
+
+    // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidationList(formValidationConfig);
+
+/** Открыть попап для картинки */
+const handleCardClick = (data) => {
+  popupImageImg.src = data.link;
+  popupImageImg.alt = data.name;
+  popupImageName.textContent = data.name;
+  openPopup(popupImage);
+}
+
+/**Функция создания одной карточки */
+function createCard(data) {
+  const card = new Card(data, '#element-template', handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
+const addElements = (data) => {
+  const cardElement = createCard(data);
+  /**добавить в контейнер */
+  cardsContainer.prepend(cardElement);
+}
+
+// Создаем карточки
+elementsValue.forEach(addElements);
