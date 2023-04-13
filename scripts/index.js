@@ -1,7 +1,7 @@
 /* КАРТОЧКИ */
-export const cardsContainer = document.querySelector('.elements')                    // контейнер 
+export const cardsContainer = document.querySelector('.elements')             // контейнер 
 const cardPopup = document.querySelector('.popup_add_element');               // попап
-const openButtonСard = document.querySelector('.profile__add-button');         // кнопка сохранить
+const openButtonСard = document.querySelector('.profile__add-button');        // кнопка сохранить
 
 /* ПРОФИЛЬ */
 const profile = document.querySelector('.profile');                           // блок profile
@@ -17,8 +17,8 @@ export const popupImageName = popupImage.querySelector('.popup__name');         
 /** Список всех popup */
 const popupList = document.querySelectorAll('.popup'); 
 
-import {formValidationConfig, FormValidator} from './validate.js'
-import { addElements } from './cards.js';
+import {formValidationConfig, FormValidator} from './FormValidator.js'
+import { addElements } from './Card.js';
 
 
 /**
@@ -49,22 +49,6 @@ const resetValidationStyle = (popup) => {
   validation.clearValidation()
 };
 
-
-
-/**
- * 
- * @param {*} popup сброс все инпут полей у попап 
- * @param {*} config конфиг для валидации, переменная formValidationConfig
- */
-const resetFormInputs = (popup, config) => {
-  const formElement = popup.querySelector(config.formSelector); 
-  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-
-  formElement.reset();// очищаем инпут поля
-  inputList.forEach((inputElement) => {
-    // hideInputError(formElement, inputElement, config); // очищаем от ошибок валидации
-  });
-}
 
 /**
  * Функция обработки события.

@@ -110,7 +110,6 @@ export class FormValidator {
 
 }
 
-
 /**
  * Функция выбирает все формы с указанным классом в DOM.
  * Для каждой формы вызовем функцию enableValidationList.
@@ -129,9 +128,4 @@ const enableValidationList = (config) => {
   // console.log(validationList);
 };
 
-
 enableValidationList(formValidationConfig);
-
-
-
-
