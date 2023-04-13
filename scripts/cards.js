@@ -68,10 +68,14 @@ class Card {
   }
 }
 
-// Создаем карточки
-elementsValue.forEach((item) => {
-  const card = new Card(item, '#element-template');
+export const addElements = (data) => {
+  const card = new Card(data, '#element-template');
   const cardElement = card.generateCard();
   /**добавить в контейнер */
   cardsContainer.prepend(cardElement);
+}
+
+// Создаем карточки
+elementsValue.forEach((item) => {
+  addElements(item);
 });

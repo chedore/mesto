@@ -17,6 +17,10 @@ export const popupImageName = popupImage.querySelector('.popup__name');         
 /** Список всех popup */
 const popupList = document.querySelectorAll('.popup'); 
 
+import {formValidationConfig, FormValidator} from './validate.js'
+import { addElements } from './cards.js';
+
+
 /**
  * 
  * @param {object} popup открыть попап
@@ -40,9 +44,9 @@ const closePopup  = (popup) => {
  * @param {*} popup сброс всех полей у попап
  */
 const resetValidationStyle = (popup) => {
-  const config = formValidationConfig;
-  disableSubmitButton(true, popup.querySelector(config.submitButtonSelector), config); // сделай кнопку неактивной
-  resetFormInputs(popup, config); // очистить все инпуты
+  const formElement = popup.querySelector(formValidationConfig.formSelector); 
+  const validation = new FormValidator(formElement, formValidationConfig);
+  validation.clearValidation()
 };
 
 
@@ -58,7 +62,7 @@ const resetFormInputs = (popup, config) => {
 
   formElement.reset();// очищаем инпут поля
   inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, config); // очищаем от ошибок валидации
+    // hideInputError(formElement, inputElement, config); // очищаем от ошибок валидации
   });
 }
 
@@ -146,7 +150,15 @@ function manageCardPopup (popup, openButton){
 
   const saveCardForm = (evt) => {
     evt.preventDefault();
-    addElements(urlInput.value, nameInput.value, nameInput.value); /**Создаем карточку */
+
+    const data = {
+      name: nameInput.value,
+      img: urlInput.value,
+      alt: nameInput.value
+    }
+    
+    addElements(data);/**Создаем карточку */
+
     closePopup(popup);
   };
 
