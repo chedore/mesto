@@ -42,11 +42,10 @@ const closePopup  = (popup) => {
 
 /**
  * 
- * @param {*} popup сброс всех полей у попап
+ * @param {*} formElement форма
  */
-const resetValidationStyle = (popup) => {
-  const profileForm = popup.querySelector(formValidationConfig.formSelector); 
-  formValidators[profileForm.getAttribute('name')].clearValidation();
+const resetValidationStyle = (formElement) => {
+  formValidators[formElement.getAttribute('name')].clearValidation();
 };
 
 
@@ -98,7 +97,7 @@ function managePopupProfile (popup, openButton) {
 
   /**Открыть попап */
   openButton.addEventListener('click', () => {
-    resetValidationStyle(popup);
+    resetValidationStyle(profileForm);
     nameInput.value = nameProfile.textContent;
     jobInput.value = jobProfile.textContent;
     openPopup(popup);
@@ -128,7 +127,7 @@ function manageCardPopup (popup, openButton){
 
   /**Открыть попап */
   openButton.addEventListener('click', () => {
-    resetValidationStyle(popup);
+    resetValidationStyle(cardForm);
     openPopup(popup); 
   }); 
 
