@@ -30,3 +30,15 @@ export const elementsValue = [
     alt: 'Байкал'
   }
 ]
+
+// конфиг для валидации
+export const formValidationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__submit-inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+
+export const cardListSelector = '.elements';

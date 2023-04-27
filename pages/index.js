@@ -1,5 +1,5 @@
 /* КАРТОЧКИ */
-export const cardsContainer = document.querySelector('.elements')             // контейнер 
+// export const cardsContainer = document.querySelector('.elements')             // контейнер 
 const cardPopup = document.querySelector('.popup_add_element');               // попап
 const openButtonСard = document.querySelector('.profile__add-button');        // кнопка сохранить
 
@@ -17,9 +17,13 @@ export const popupImageName = popupImage.querySelector('.popup__name');         
 /** Список всех popup */
 const popupList = document.querySelectorAll('.popup'); 
 
-import {formValidationConfig, FormValidator} from '../scripts/FormValidator.js'
-import {Card} from '../scripts/Card.js';
-import {elementsValue} from '../scripts/elements.js'
+import FormValidator from '../components/FormValidator.js'
+import Section from '../components/Section.js';
+import {
+  elementsValue, 
+  formValidationConfig,
+  cardListSelector
+} from '../utils/constants.js'
 
 
 /**
@@ -182,25 +186,13 @@ const enableValidationList = (config) => {
 enableValidationList(formValidationConfig);
 
 /** Открыть попап для картинки */
-const handleCardClick = (data) => {
+export const handleCardClick = (data) => {
   popupImageImg.src = data.link;
   popupImageImg.alt = data.name;
   popupImageName.textContent = data.name;
   openPopup(popupImage);
 }
 
-/**Функция создания одной карточки */
-function createCard(data) {
-  const card = new Card(data, '#element-template', handleCardClick);
-  const cardElement = card.generateCard();
-  return cardElement
-}
 
-const addElements = (data) => {
-  const cardElement = createCard(data);
-  /**добавить в контейнер */
-  cardsContainer.prepend(cardElement);
-}
-
-// Создаем карточки
-elementsValue.forEach(addElements);
+const defaultCardList = new Section({data: elementsValue} , cardListSelector);
+defaultCardList.renderItems();
