@@ -22,6 +22,7 @@
 - [Чеклист ПР5](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-5.pdf);
 - [Чеклист ПР6](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-6.pdf);
 - [Чеклист ПР7](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-7.pdf);
+- [Чеклист ПР8](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-8.pdf);
 
 
 - Плавное открытие и закрытие попапов. Закрыть попап можно кликом на оверлей, крестик или esc.

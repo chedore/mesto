@@ -17,9 +17,9 @@ export const popupImageName = popupImage.querySelector('.popup__name');         
 /** Список всех popup */
 const popupList = document.querySelectorAll('.popup'); 
 
-import {formValidationConfig, FormValidator} from './FormValidator.js'
-import {Card} from './Card.js';
-import {elementsValue} from './elements.js'
+import {formValidationConfig, FormValidator} from '../scripts/FormValidator.js'
+import {Card} from '../scripts/Card.js';
+import {elementsValue} from '../scripts/elements.js'
 
 
 /**
