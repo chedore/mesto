@@ -42,3 +42,4 @@ export const formValidationConfig = {
 };
 
 export const cardListSelector = '.elements';
+export const profilePopupSelector = '.popup_place_profile';

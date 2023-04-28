@@ -5,7 +5,7 @@ const openButtonСard = document.querySelector('.profile__add-button');        /
 
 /* ПРОФИЛЬ */
 const profile = document.querySelector('.profile');                           // блок profile
-const profilePopup = document.querySelector('.popup_place_profile');          // попап
+// const profilePopup = document.querySelector('.popup_place_profile');          // попап
 const openButtonProfile = profile.querySelector('.profile__edit-button');     // кнопка редактирования
 
 
@@ -17,32 +17,35 @@ export const popupImageName = popupImage.querySelector('.popup__name');         
 /** Список всех popup */
 const popupList = document.querySelectorAll('.popup'); 
 
+import Card from '../components/Card.js';
+import Popup from '../components/Popup.js';
 import FormValidator from '../components/FormValidator.js'
 import Section from '../components/Section.js';
 import {
   elementsValue, 
   formValidationConfig,
-  cardListSelector
+  cardListSelector,
+  profilePopupSelector
 } from '../utils/constants.js'
 
 
-/**
- * 
- * @param {object} popup открыть попап
- */
-export const openPopup = (popup) => { 
-  popup.classList.add('popup_opened'); 
-  document.addEventListener('keydown', handleClosePopupKeydown);
-};
+// /**
+//  * 
+//  * @param {object} popup открыть попап
+//  */
+// export const openPopup = (popup) => { 
+//   popup.classList.add('popup_opened'); 
+//   // document.addEventListener('keydown', handleClosePopupKeydown);
+// };
 
-/**
- * 
- * @param {object} popup закрыть попап
- */
-const closePopup  = (popup) => { 
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleClosePopupKeydown);
-};
+// /**
+//  * 
+//  * @param {object} popup закрыть попап
+//  */
+// const closePopup  = (popup) => { 
+//   popup.classList.remove('popup_opened');
+//   // document.removeEventListener('keydown', handleClosePopupKeydown);
+// };
 
 /**
  * 
@@ -60,11 +63,11 @@ const resetValidationStyle = (formElement) => {
  * 
  * @param {*} evt 
  */
-const handleClosePopupClick = (evt) => {
-  if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close")) {
-    closePopup(evt.target.closest('.popup'));
-  }
-};
+// const handleClosePopupClick = (evt) => {
+//   if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close")) {
+//     closePopup(evt.target.closest('.popup'));
+//   }
+// };
 
 
 /**
@@ -73,16 +76,16 @@ const handleClosePopupClick = (evt) => {
  * 
  * @param {*} evt 
  */
-const handleClosePopupKeydown = (evt) => {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  };
-};
+// const handleClosePopupKeydown = (evt) => {
+//   if (evt.key === 'Escape') {
+//     closePopup(document.querySelector('.popup_opened'));
+//   };
+// };
 
 
-popupList.forEach((popup) => {
-  popup.addEventListener('click', handleClosePopupClick);
-});
+// popupList.forEach((popup) => {
+//   popup.addEventListener('click', handleClosePopupClick);
+// });
 
 
 
@@ -153,8 +156,8 @@ function manageCardPopup (popup, openButton){
   cardForm.addEventListener('submit', saveCardForm); 
 }
 
-/** Все о попап - профиль */
-managePopupProfile(profilePopup, openButtonProfile);
+// /** Все о попап - профиль */
+// managePopupProfile(profilePopup, openButtonProfile);
 
 /** Все о попап - элемент */
 manageCardPopup(cardPopup, openButtonСard);
@@ -193,6 +196,21 @@ export const handleCardClick = (data) => {
   openPopup(popupImage);
 }
 
-
-const defaultCardList = new Section({data: elementsValue} , cardListSelector);
+const defaultCardList = new Section({
+  items: elementsValue,
+  renderer: (item) => {
+    const card = new Card(item, '#element-template', handleCardClick);
+    const cardElement = card.generateCard();
+    defaultCardList.addItem(cardElement);
+  },
+},
+cardListSelector
+); 
 defaultCardList.renderItems();
+
+const profilePopup = new Popup(profilePopupSelector);
+profilePopup.setEventListeners();
+
+openButtonProfile.addEventListener('click', () => {
+  profilePopup.open();
+}); 

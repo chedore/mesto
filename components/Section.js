@@ -1,27 +1,25 @@
-import Card from '../components/Card.js';
-import {handleCardClick} from '../pages/index.js';
+// import {handleCardClick} from '../pages/index.js';
 
 export default class Section {
-  constructor({data}, selector) {
-    this._initialArray = data;
+  constructor({items, renderer}, selector) {
+    this._initialArray = items;
     this._container = document.querySelector(selector);
+    this._renderer = renderer;
+  }
+
+  // вставим разметку на страницу
+  // добавить в контейнер
+  addItem(element) {
+    this._container.prepend(element);
   }
 
   // визуализируем карточки
   // функция создания одной карточки
   renderItems() {
-    this._initialArray.forEach((item) => {
-      const card = new Card(item, '#element-template', handleCardClick);
-      const cardElement = card.generateCard();
-
-      this.setItem(cardElement);
-    })
-
+    this._initialArray.forEach(element => {
+      this._renderer(element);
+    });
   }
 
-  // вставим разметкуна страницу
-  // добавить в контейнер
-  setItem(element) {
-    this._container.prepend(element);
-  }
+
 }
