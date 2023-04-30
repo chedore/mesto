@@ -4,9 +4,9 @@ const cardPopup = document.querySelector('.popup_add_element');               //
 const openButtonСard = document.querySelector('.profile__add-button');        // кнопка сохранить
 
 /* ПРОФИЛЬ */
-const profile = document.querySelector('.profile');                           // блок profile
+// const profile = document.querySelector('.profile');                           // блок profile
 // const profilePopup = document.querySelector('.popup_place_profile');          // попап
-const openButtonProfile = profile.querySelector('.profile__edit-button');     // кнопка редактирования
+//const openButtonProfile = document.querySelector('.profile__edit-button');     // кнопка редактирования
 
 
 /* КАРТИНКА */
@@ -18,34 +18,19 @@ export const popupImageName = popupImage.querySelector('.popup__name');         
 const popupList = document.querySelectorAll('.popup'); 
 
 import Card from '../components/Card.js';
-import Popup from '../components/Popup.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js'
 import Section from '../components/Section.js';
 import {
   elementsValue, 
   formValidationConfig,
   cardListSelector,
-  profilePopupSelector
+  profilePopupSelector,
+  openButtonProfile
 } from '../utils/constants.js'
+import UserInfo from '../components/UserInfo.js';
 
 
-// /**
-//  * 
-//  * @param {object} popup открыть попап
-//  */
-// export const openPopup = (popup) => { 
-//   popup.classList.add('popup_opened'); 
-//   // document.addEventListener('keydown', handleClosePopupKeydown);
-// };
-
-// /**
-//  * 
-//  * @param {object} popup закрыть попап
-//  */
-// const closePopup  = (popup) => { 
-//   popup.classList.remove('popup_opened');
-//   // document.removeEventListener('keydown', handleClosePopupKeydown);
-// };
 
 /**
  * 
@@ -56,70 +41,7 @@ const resetValidationStyle = (formElement) => {
 };
 
 
-/**
- * Функция обработки события.
- * - закрытие попапа кликом на оверлей;
- * - закрытие попапа клипом на крестик.
- * 
- * @param {*} evt 
- */
-// const handleClosePopupClick = (evt) => {
-//   if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close")) {
-//     closePopup(evt.target.closest('.popup'));
-//   }
-// };
 
-
-/**
- * Функция обработки события.
- * - закрытие попапа нажатием на Esc.
- * 
- * @param {*} evt 
- */
-// const handleClosePopupKeydown = (evt) => {
-//   if (evt.key === 'Escape') {
-//     closePopup(document.querySelector('.popup_opened'));
-//   };
-// };
-
-
-// popupList.forEach((popup) => {
-//   popup.addEventListener('click', handleClosePopupClick);
-// });
-
-
-
-/**
- * Управление попапом профиля. Позволяет зонировать функцию.
- * 
- * @param {object} popup ссылка на вызываемый попап
- * @param {object} openButton кнопка открыть
- */
-function managePopupProfile (popup, openButton) {
-  const nameProfile = profile.querySelector('.profile__info-title');
-  const jobProfile = profile.querySelector('.profile__info-subtitle');
-  const nameInput = popup.querySelector('.popup__input_type_name');
-  const jobInput = popup.querySelector('.popup__input_type_job');
-  const profileForm = document.forms['profile'];
-
-  /**Открыть попап */
-  openButton.addEventListener('click', () => {
-    resetValidationStyle(profileForm);
-    nameInput.value = nameProfile.textContent;
-    jobInput.value = jobProfile.textContent;
-    openPopup(popup);
-  }); 
-
-  const saveProfileForm = (evt) => {
-    evt.preventDefault();
-    nameProfile.textContent = nameInput.value;
-    jobProfile.textContent = jobInput.value;
-    closePopup(popup);
-  };
-
-  /**Сохранить попап */
-  profileForm.addEventListener('submit', saveProfileForm); 
-}
 
 /**
  * Управление попапом элемента. Позволяет зонировать функцию.
@@ -155,9 +77,6 @@ function manageCardPopup (popup, openButton){
   /**Сохранить попап */
   cardForm.addEventListener('submit', saveCardForm); 
 }
-
-// /** Все о попап - профиль */
-// managePopupProfile(profilePopup, openButtonProfile);
 
 /** Все о попап - элемент */
 manageCardPopup(cardPopup, openButtonСard);
@@ -196,6 +115,9 @@ export const handleCardClick = (data) => {
   openPopup(popupImage);
 }
 
+//======
+
+// Создаем карточки
 const defaultCardList = new Section({
   items: elementsValue,
   renderer: (item) => {
@@ -208,9 +130,26 @@ cardListSelector
 ); 
 defaultCardList.renderItems();
 
-const profilePopup = new Popup(profilePopupSelector);
+/** Все о попап - профиль */
+// Информация из профля пользователя
+const userInfo = new UserInfo({
+  selectorName: '.profile__info-title',
+  selectorJob: '.profile__info-subtitle'
+})
+/**Сохранить попап редактировапния профиля */
+const profilePopup = new PopupWithForm({
+  selectorPopup: profilePopupSelector,
+  selectorForm: '.popup__form',
+  selectorInput: '.popup__input',
+  submitCallback: (data) => {
+    userInfo.setUserInfo(data);
+  }
+});
 profilePopup.setEventListeners();
 
+/**Открыть попап редактировапния профиля */
 openButtonProfile.addEventListener('click', () => {
+  resetValidationStyle(document.forms['profile']);
+  profilePopup.setInputValues(userInfo.getUserInfo());
   profilePopup.open();
 }); 

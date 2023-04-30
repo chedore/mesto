@@ -3,14 +3,17 @@ export default class Popup {
     this._popup = document.querySelector(selector);
     this._buttonClose = this._popup.querySelector('.popup__close');
   }
+
   open() {
     this._popup.classList.add('popup_opened'); 
     document.addEventListener('keydown', this._handleEscClose.bind(this));
   }
+
   close() {
     this._popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._handleEscClose.bind(this));
   }
+
   // - закрытие попапа кликом на оверлей;
   _handleOverlayClosePopup(evt) {
     if (evt.target === evt.currentTarget) {
@@ -32,5 +35,4 @@ export default class Popup {
     // - закрытие попапа клипом на крестик.
     this._buttonClose.addEventListener('click', this.close.bind(this));
   }
-
 }

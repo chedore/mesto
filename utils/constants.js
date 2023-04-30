@@ -40,6 +40,9 @@ export const formValidationConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 };
-
-export const cardListSelector = '.elements';
-export const profilePopupSelector = '.popup_place_profile';
+/* КАРТОЧКИ */
+export const cardListSelector = '.elements';                                          // контейнер для карточек
+/* ПРОФИЛЬ */
+export const profilePopupSelector = '.popup_place_profile';                           // попап ПРОФИЛЬ
+export const openButtonProfile = document.querySelector('.profile__edit-button');     // кнопка сохранить для попапа ПРОФИЛЬ
+/* КАРТИНКА */
