@@ -1,32 +1,40 @@
+const altaiImage = new URL('../images/altai.jpg', import.meta.url);
+const kislovodskImage = new URL('../images/kislovodsk.jpg', import.meta.url);
+const sochiImage = new URL('../images/krasnaya_polyana.jpg', import.meta.url)
+const murmanskImage = new URL('../images/murmansk.jpg', import.meta.url);
+const gamovaImage = new URL('../images/gamova.jpg', import.meta.url);
+const baikalImage = new URL('../images/baikal.png', import.meta.url)
+
+
 export const elementsValue = [
   {
     name: 'Республика Алтай',
-    img: './images/altai.jpg',
+    img: altaiImage,
     alt: 'Лес'
   },
   {
     name: 'Кисловодск',
-    img: './images/kislovodsk.jpg',
+    img: kislovodskImage,
     alt: 'Кольцо гора'
   },
   {
     name: 'Сочи',
-    img: './images/krasnaya_polyana.jpg',
+    img: sochiImage,
     alt: 'Красная поляна'
   },
   {
     name: 'Мурманск',
-    img: './images/murmansk.jpg',
+    img: murmanskImage,
     alt: 'Cверное сияние'
   },
   {
     name: 'п-ов Гамова',
-    img: './images/gamova.jpg',
+    img: gamovaImage,
     alt: 'Полуострова Гамова'
   },
   {
     name: 'Байкал',
-    img: './images/baikal.png',
+    img: baikalImage,
     alt: 'Байкал'
   }
 ]
