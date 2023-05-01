@@ -13,11 +13,8 @@ export default class FormValidator {
   /**Функция очисткиформы формы */
   clearValidation() {
 
-
     //отлючим кнопку
     this._disableSubmitButton(true);
-
-    this._form.reset();// очищаем инпут поля
 
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement); // очищаем от ошибок валидации
