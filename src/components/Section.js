@@ -1,8 +1,7 @@
 // import {handleCardClick} from '../pages/index.js';
 
 export default class Section {
-  constructor({items, renderer}, selector) {
-    this._initialArray = items;
+  constructor({renderer}, selector) {
     this._container = document.querySelector(selector);
     this._renderer = renderer;
   }
@@ -15,8 +14,8 @@ export default class Section {
 
   // визуализируем карточки
   // функция создания одной карточки
-  renderItems() {
-    this._initialArray.forEach(element => {
+  renderItems(elements) {
+    elements.forEach(element => {
       this._renderer(element);
     });
   }

@@ -1,38 +1,3 @@
-const altaiImage = new URL('../images/altai.jpg', import.meta.url);
-const kislovodskImage = new URL('../images/kislovodsk.jpg', import.meta.url);
-const sochiImage = new URL('../images/krasnaya_polyana.jpg', import.meta.url)
-const murmanskImage = new URL('../images/murmansk.jpg', import.meta.url);
-const gamovaImage = new URL('../images/gamova.jpg', import.meta.url);
-const baikalImage = new URL('../images/baikal.png', import.meta.url)
-
-
-export const elementsValue = [
-  {
-    name: 'Республика Алтай',
-    link: altaiImage
-  },
-  {
-    name: 'Кисловодск',
-    link: kislovodskImage
-  },
-  {
-    name: 'Сочи',
-    link: sochiImage
-  },
-  {
-    name: 'Мурманск',
-    link: murmanskImage
-  },
-  {
-    name: 'п-ов Гамова',
-    link: gamovaImage
-  },
-  {
-    name: 'Байкал',
-    link: baikalImage
-  }
-]
-
 // конфиг для валидации
 export const formValidationConfig = {
   formSelector: '.popup__form',

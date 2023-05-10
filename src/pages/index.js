@@ -4,8 +4,7 @@ import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js'
 import Section from '../components/Section.js';
-import {
-  elementsValue, 
+import { 
   formValidationConfig,
 
   cardListSelector,
@@ -37,7 +36,10 @@ const promises = [api.getInitialCards()]
 
 // Передаём массив с промисами методу Promise.all
 Promise.all(promises)
-  .then(result => console.log('ok'))
+  .then(([cards]) => {
+    console.log('ok', cards)
+    defaultCardList.renderItems(cards);
+  })
   .catch(error => alert(error))
 
 /**------------------Валидация---------------------- */
@@ -93,7 +95,6 @@ const createCard = (cardData) => {
 
 // Создаем карточки
 const defaultCardList = new Section({
-  items: elementsValue,
   renderer: (item) => {
     const cardElement = createCard(item);
     defaultCardList.addItem(cardElement);
@@ -101,7 +102,6 @@ const defaultCardList = new Section({
 },
 cardListSelector
 ); 
-defaultCardList.renderItems();
 
 /**------------------Попап профильпользователя---------------------- */
 /** Все о попап - профиль */
