@@ -20,12 +20,25 @@ import {
 
   popupImageSelector,
   popupImageImgSelector,
-  popupImageNameSelector
+  popupImageNameSelector,
+
+  apiConfig
 
 } from '../utils/constants.js'
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import Api from '../components/Api';
 
+/**------------------Работа с сервером---------------------- */
+const api = new Api(apiConfig);
+
+// Создаём массив с промисами
+const promises = [api.getInitialCards()]
+
+// Передаём массив с промисами методу Promise.all
+Promise.all(promises)
+  .then(result => console.log('ok'))
+  .catch(error => alert(error))
 
 /**------------------Валидация---------------------- */
 /**

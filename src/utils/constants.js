@@ -9,33 +9,27 @@ const baikalImage = new URL('../images/baikal.png', import.meta.url)
 export const elementsValue = [
   {
     name: 'Республика Алтай',
-    img: altaiImage,
-    alt: 'Лес'
+    link: altaiImage
   },
   {
     name: 'Кисловодск',
-    img: kislovodskImage,
-    alt: 'Кольцо гора'
+    link: kislovodskImage
   },
   {
     name: 'Сочи',
-    img: sochiImage,
-    alt: 'Красная поляна'
+    link: sochiImage
   },
   {
     name: 'Мурманск',
-    img: murmanskImage,
-    alt: 'Cверное сияние'
+    link: murmanskImage
   },
   {
     name: 'п-ов Гамова',
-    img: gamovaImage,
-    alt: 'Полуострова Гамова'
+    link: gamovaImage
   },
   {
     name: 'Байкал',
-    img: baikalImage,
-    alt: 'Байкал'
+    link: baikalImage
   }
 ]
 
@@ -65,3 +59,12 @@ export const profileJobSelector = '.profile__info-subtitle';                    
 export const popupImageSelector = '.popup_type_image';                                // попап для карточки
 export const popupImageImgSelector = '.popup__img';                                   // попап элемент image
 export const popupImageNameSelector = '.popup__name';                                 // попап элемент name
+
+// конфиг для api (работа с сервером)
+export const apiConfig = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
+  headers: {
+    authorization: 'fdea87e7-1df2-431a-b562-32952ab45f46',
+    'Content-Type': 'application/json'
+  }
+}
