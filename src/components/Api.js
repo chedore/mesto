@@ -1,21 +1,31 @@
 export default class Api {
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
-    this._authorization = headers.authorization;
+    this._headers = headers;
   }
+  /**Проверить данные от сервера*/
   _checkResponse(res){
     if (res.ok) 
       {return res.json();}
     else 
       {return Promise.reject(`Запрос отклонён, ошибка ${res.status}, нам жаль :(`)}
   }
-
-  async getInitialCards() {
-    return await fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: this._authorization
-      }
+  /**Получение информации о пользователе с сервера*/
+  async getInitialUser(){
+    return await fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      headers: this._headers
     })
     .then(res => this._checkResponse(res));
   }
+
+  /**Получение карточек с сервера*/
+  async getInitialCards() {
+    return await fetch(`${this._baseUrl}/cards`, {
+      method: 'GET',
+      headers: this._headers
+    })
+    .then(res => this._checkResponse(res));
+  }
+
 }

@@ -19,6 +19,7 @@ export const profilePopupSelector = '.popup_place_profile';                     
 export const openButtonProfile = document.querySelector('.profile__edit-button');     // кнопка сохранить для попапа ПРОФИЛЬ
 export const profileNameSelector = '.profile__info-title';                            // данные о профиле имя 
 export const profileJobSelector = '.profile__info-subtitle';                          // данные о профиле работа
+export const profileAvatarSelector = '.profile__avatar';                              // url аватарки профиля
 
 /* КАРТИНКА */
 export const popupImageSelector = '.popup_type_image';                                // попап для карточки
@@ -30,6 +31,6 @@ export const apiConfig = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
   headers: {
     authorization: 'fdea87e7-1df2-431a-b562-32952ab45f46',
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json"
   }
 }

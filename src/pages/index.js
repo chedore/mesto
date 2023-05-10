@@ -16,6 +16,7 @@ import {
   openButtonProfile,
   profileNameSelector,
   profileJobSelector,
+  profileAvatarSelector,
 
   popupImageSelector,
   popupImageImgSelector,
@@ -32,15 +33,18 @@ import Api from '../components/Api';
 const api = new Api(apiConfig);
 
 // Создаём массив с промисами
-const promises = [api.getInitialCards()]
+const promises = [api.getInitialUser(), api.getInitialCards()]
 
 // Передаём массив с промисами методу Promise.all
 Promise.all(promises)
-  .then(([cards]) => {
+  .then(([user, cards]) => {
     console.log('ok', cards)
+    console.log('user', {user})
+    userInfo.setUserInfo(user);
     defaultCardList.renderItems(cards);
   })
   .catch(error => alert(error))
+
 
 /**------------------Валидация---------------------- */
 /**
@@ -108,7 +112,8 @@ cardListSelector
 // Информация из профля пользователя
 const userInfo = new UserInfo({
   selectorName: profileNameSelector,
-  selectorJob: profileJobSelector
+  selectorJob: profileJobSelector,
+  selectorAvatar: profileAvatarSelector
 })
 
 /**Сохранить попап редактировапния профиля */
