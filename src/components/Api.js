@@ -54,4 +54,13 @@ export default class Api {
     .then(res => this._checkResponse(res));
   }
 
+  /**Удаление карточки на сервере*/ 
+  async deleteCard(cardId) {
+    return await fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(res => this._checkResponse(res));
+  }
+
 }

@@ -36,14 +36,16 @@ const api = new Api(apiConfig);
 
 // Создаём массив с промисами
 const promises = [api.getInitialUser(), api.getInitialCards()]
+let curentUserId;
 
 // Передаём массив с промисами методу Promise.all
 Promise.all(promises)
   .then(([user, cards]) => {
     console.log('ok', cards)
     console.log('user', {user})
+    curentUserId = user._id;
     userInfo.setUserInfo(user);
-    defaultCardList.renderItems(cards);
+    defaultCardList.renderItems(cards, curentUserId);
   })
   .catch(error => alert(error))
 
@@ -92,10 +94,17 @@ const cardImagePopup = new PopupWithImage({
 /**------------------Попап подтверждения удаления карточки---------------------- */
 
 const cardDeletePopup = new PopupProofDeleteCard({
-  selectorPopup: popupProofDeleteCardSelector
-});
+  selectorPopup: popupProofDeleteCardSelector,
+  submitCallback: (cardId, card) => {
+    api.deleteCard(cardId)
+    .then(() => {
+      card.handleBasketClick();
+      cardDeletePopup.close();
+    })
+    .catch(error => alert(error));
+  }
 
-// cardDeletePopup.open();
+});
 
 /**------------------Карточки с изображением---------------------- */
 
@@ -103,12 +112,13 @@ const cardDeletePopup = new PopupProofDeleteCard({
 const createCard = (cardData) => {
   const card = new Card({
     data: cardData, 
+    userID: curentUserId,
     templateSelector: cardTemplateSelector, 
     handleCardClick: (image) => {
       cardImagePopup.open(image);
     },
-    handleCardDelete: () => {
-      cardDeletePopup.open();
+    handleCardDelete: (cardId, cardElement) => {
+      cardDeletePopup.open(cardId, cardElement);
     }
   });
   return card.generateCard();

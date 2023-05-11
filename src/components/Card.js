@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({data, templateSelector, handleCardClick, handleCardDelete}) {
+  constructor({data, userID, templateSelector, handleCardClick, handleCardDelete}) {
     this._src = data.link || '';
     this._alt = data.name || '';
     this._name = data.name || '';
@@ -7,6 +7,7 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
     this.cardData = data; 
+    this.userID = userID;
   }
   _getTemplate() {
     const cardElement = document
@@ -16,6 +17,8 @@ export default class Card {
       .cloneNode(true); 
     return cardElement;
   }
+  
+
   /** Создать 1-карточку */
   generateCard() {
     this._element = this._getTemplate();
@@ -28,12 +31,18 @@ export default class Card {
     this._setEventListeners(); //слушатель событий
 
     //Добавим данные
-
     this._cardImage.src = this._src;
     this._cardImage.alt = this._alt;
     this._element.querySelector('.element__info-title').textContent = this._name;
 
+    //Выставляем лайки, которые пришли от сервера
     this.renderCardLike(this.cardData);
+
+    //Показываем корзину, только владельцу карточки
+    if (this.userID !== this.cardData.owner._id)
+    {
+      this._basketButton.remove();
+    }
 
     return this._element;
   }
@@ -55,10 +64,10 @@ export default class Card {
     this._likeButton.classList.toggle('element__info-button-active');
   }
 
-  // /**удалить карточку */
-  // _handleBasketClick() {
-  //   this._element.remove()
-  // }
+  /**удалить карточку */
+  handleBasketClick(){
+    this._element.remove();
+  }
   
   _setEventListeners() {
     /**поставиь лайк */
@@ -66,8 +75,8 @@ export default class Card {
       this._handleLikeClick();
     });
 
-    /**удалить карточку */
-    this._basketButton.addEventListener('click', () => this._handleCardDelete(this));
+    /**удалить карточку по кнопке */
+    this._basketButton.addEventListener('click', () => this._handleCardDelete(this.cardData._id, this));
 
     /**открыть картинку */
     this._cardButton.addEventListener('click', () => {
