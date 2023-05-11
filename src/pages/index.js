@@ -143,15 +143,11 @@ const popupFormAddCards = new PopupWithForm({
   selectorForm: '.popup__form',
   selectorInput: '.popup__input',
   submitCallback: (data) => {
-    {
-      defaultCardList.addItem(
-        createCard({
-          name: data.title,
-          img: data.url,
-          alt: data.title
-        })
-      )
-    }
+    api.addNewCard(data)
+    .then(newCard => {
+      defaultCardList.addItem( createCard(newCard) )
+    })
+    .catch(error => alert(error));
   }
 });
 

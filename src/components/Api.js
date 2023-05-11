@@ -41,4 +41,17 @@ export default class Api {
     .then(res => this._checkResponse(res));
   }
 
+  /**Добавление новой карточки*/ 
+  async addNewCard(data) {
+    return await fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.title,
+        link: data.url
+      })
+    })
+    .then(res => this._checkResponse(res));
+  }
+
 }
