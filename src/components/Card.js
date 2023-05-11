@@ -1,10 +1,11 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor({data, templateSelector, handleCardClick, handleCardDelete}) {
     this._src = data.link || '';
     this._alt = data.name || '';
     this._name = data.name || '';
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDelete = handleCardDelete;
     this.cardData = data; 
   }
   _getTemplate() {
@@ -54,10 +55,10 @@ export default class Card {
     this._likeButton.classList.toggle('element__info-button-active');
   }
 
-  /**удалить карточку */
-  _handleBasketClick() {
-    this._element.remove()
-  }
+  // /**удалить карточку */
+  // _handleBasketClick() {
+  //   this._element.remove()
+  // }
   
   _setEventListeners() {
     /**поставиь лайк */
@@ -66,9 +67,7 @@ export default class Card {
     });
 
     /**удалить карточку */
-    this._basketButton.addEventListener('click', () => {
-      this._handleBasketClick();
-    });
+    this._basketButton.addEventListener('click', () => this._handleCardDelete(this));
 
     /**открыть картинку */
     this._cardButton.addEventListener('click', () => {

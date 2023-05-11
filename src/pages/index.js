@@ -10,7 +10,8 @@ import {
   cardListSelector,
   cardTemplateSelector,
   cardPopupSelector,
-  popupButtonСard,  
+  popupButtonСard,
+  popupProofDeleteCardSelector,  
 
   profilePopupSelector,
   openButtonProfile,
@@ -28,6 +29,7 @@ import {
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Api from '../components/Api';
+import PopupProofDeleteCard from '../components/PopupProofDeleteCard.js';
 
 /**------------------Работа с сервером---------------------- */
 const api = new Api(apiConfig);
@@ -87,12 +89,27 @@ const cardImagePopup = new PopupWithImage({
   selectorCardName: popupImageNameSelector
 });
 
+/**------------------Попап подтверждения удаления карточки---------------------- */
+
+const cardDeletePopup = new PopupProofDeleteCard({
+  selectorPopup: popupProofDeleteCardSelector
+});
+
+// cardDeletePopup.open();
+
 /**------------------Карточки с изображением---------------------- */
 
 /** Функция создания карточки */
 const createCard = (cardData) => {
-  const card = new Card(cardData, cardTemplateSelector, (image) => {
-    cardImagePopup.open(image);
+  const card = new Card({
+    data: cardData, 
+    templateSelector: cardTemplateSelector, 
+    handleCardClick: (image) => {
+      cardImagePopup.open(image);
+    },
+    handleCardDelete: () => {
+      cardDeletePopup.open();
+    }
   });
   return card.generateCard();
 }
@@ -161,3 +178,4 @@ popupButtonСard.addEventListener('click', () => {
 profilePopup.setEventListeners();
 cardImagePopup.setEventListeners();
 popupFormAddCards.setEventListeners();
+cardDeletePopup.setEventListeners();

@@ -13,6 +13,7 @@ export const cardListSelector = '.elements';                                    
 export const cardTemplateSelector = '#element-template';                              // шаблон для карточки
 export const cardPopupSelector = '.popup_add_element';                                // попап для добавления карточки 
 export const popupButtonСard = document.querySelector('.profile__add-button');        // кнопка добавить новую карточку
+export const popupProofDeleteCardSelector = '.popup_type_delete';                     // попап для подтверждения удаления карточки
 
 /* ПРОФИЛЬ */
 export const profilePopupSelector = '.popup_place_profile';                           // попап ПРОФИЛЬ
