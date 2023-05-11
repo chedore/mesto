@@ -122,7 +122,11 @@ const profilePopup = new PopupWithForm({
   selectorForm: '.popup__form',
   selectorInput: '.popup__input',
   submitCallback: (data) => {
-    userInfo.setUserInfo(data);
+    api.setInfolUser(data)
+    .then(res => {
+      userInfo.setUserInfo(res);
+    })
+    .catch(error => alert(error));
   }
 });
 

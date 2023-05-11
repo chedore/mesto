@@ -28,4 +28,17 @@ export default class Api {
     .then(res => this._checkResponse(res));
   }
 
+  /**Редактирование профиля*/
+  async setInfolUser(data) {
+    return await fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.job
+      })
+    })
+    .then(res => this._checkResponse(res));
+  }
+
 }
