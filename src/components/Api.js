@@ -63,4 +63,22 @@ export default class Api {
     .then(res => this._checkResponse(res));
   }
 
+  /**Поставить лайк и отправить на сервер*/
+  async setLikeUp(cardId) {
+    return await fetch(`${this._baseUrl}/cards/${cardId}/likes `, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then(res => this._checkResponse(res));
+  }
+
+  /**Удалить лайк и отправить на сервер*/
+  async setLikeDown(cardId) {
+    return await fetch(`${this._baseUrl}/cards/${cardId}/likes `, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(res => this._checkResponse(res));
+  }
+
 }

@@ -119,7 +119,24 @@ const createCard = (cardData) => {
     },
     handleCardDelete: (cardId, cardElement) => {
       cardDeletePopup.open(cardId, cardElement);
+    },
+    handleCardLikeUp: (cardId) => {
+      api.setLikeUp(cardId)
+      .then((res) => {
+        card.renderCardLike(res);
+      })
+    .catch(error => alert(error));
+
+    },
+    handleCardLikeDown: (cardId) => {
+      api.setLikeDown(cardId)
+      .then((res) => {
+        card.renderCardLike(res);
+      })
+    .catch(error => alert(error));
+
     }
+
   });
   return card.generateCard();
 }

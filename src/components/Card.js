@@ -1,11 +1,13 @@
 export default class Card {
-  constructor({data, userID, templateSelector, handleCardClick, handleCardDelete}) {
+  constructor({data, userID, templateSelector, handleCardClick, handleCardDelete, handleCardLikeUp, handleCardLikeDown}) {
     this._src = data.link || '';
     this._alt = data.name || '';
     this._name = data.name || '';
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
+    this._handleCardLikeUp = handleCardLikeUp;
+    this._handleCardLikeDown = handleCardLikeDown;
     this.cardData = data; 
     this.userID = userID;
   }
@@ -47,21 +49,42 @@ export default class Card {
     return this._element;
   }
 
+  /**Проверка лайков */
+  checkLike() {
+    return this.cardData.likes.some(like => like._id === this.userID);
+  };
+
+
   renderCardLike(card) {
     this.cardData = card;
     const likes = card.likes;
+
     if (likes.length === 0) {
       this._cardLikesCount.textContent = 0;
     }
     else {
       this._cardLikesCount.textContent = likes.length;
-
     }
+
+    if (this.checkLike()) {
+      this._likeButton.classList.add('element__info-button-active');
+    }
+    else {
+      this._likeButton.classList.remove('element__info-button-active');
+    }
+
   }
 
   /**поставиь лайк */
   _handleLikeClick() {
     this._likeButton.classList.toggle('element__info-button-active');
+    if (!this.checkLike()) {
+      this._handleCardLikeUp(this.cardData._id);
+    }
+    else {
+      this._handleCardLikeDown(this.cardData._id);
+    }
+
   }
 
   /**удалить карточку */
