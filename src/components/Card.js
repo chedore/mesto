@@ -5,7 +5,7 @@ export default class Card {
     this._name = data.name || '';
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
-    
+    this.cardData = data; 
   }
   _getTemplate() {
     const cardElement = document
@@ -22,6 +22,7 @@ export default class Card {
     this._likeButton = this._element.querySelector('.element__info-button');
     this._basketButton = this._element.querySelector('.element__basket');
     this._cardButton = this._element.querySelector('.element__image');
+    this._cardLikesCount = this._element.querySelector('.element__span');
 
     this._setEventListeners(); //слушатель событий
 
@@ -31,7 +32,21 @@ export default class Card {
     this._cardImage.alt = this._alt;
     this._element.querySelector('.element__info-title').textContent = this._name;
 
+    this.renderCardLike(this.cardData);
+
     return this._element;
+  }
+
+  renderCardLike(card) {
+    this.cardData = card;
+    const likes = card.likes;
+    if (likes.length === 0) {
+      this._cardLikesCount.textContent = 0;
+    }
+    else {
+      this._cardLikesCount.textContent = likes.length;
+
+    }
   }
 
   /**поставиь лайк */
