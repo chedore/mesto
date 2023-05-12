@@ -20,7 +20,10 @@ export const profilePopupSelector = '.popup_place_profile';                     
 export const openButtonProfile = document.querySelector('.profile__edit-button');     // кнопка сохранить для попапа ПРОФИЛЬ
 export const profileNameSelector = '.profile__info-title';                            // данные о профиле имя 
 export const profileJobSelector = '.profile__info-subtitle';                          // данные о профиле работа
-export const profileAvatarSelector = '.profile__avatar';                              // url аватарки профиля
+export const profileAvatarSelector = '.profile__img';                                 // url аватарки профиля
+export const popupAvatarSelector = '.popup_type_avatar';                              // попап аватарки профиля
+export const popupButtonAvatar = document.querySelector('.profile__avatar');          // кнопка открыть попа аватар профиля
+
 
 /* КАРТИНКА */
 export const popupImageSelector = '.popup_type_image';                                // попап для карточки

@@ -18,6 +18,8 @@ import {
   profileNameSelector,
   profileJobSelector,
   profileAvatarSelector,
+  popupAvatarSelector,
+  popupButtonAvatar,
 
   popupImageSelector,
   popupImageImgSelector,
@@ -103,7 +105,27 @@ const cardDeletePopup = new PopupProofDeleteCard({
     })
     .catch(error => alert(error));
   }
+});
 
+/**------------------Попап для редактирования аватар-профиля---------------------- */
+
+const popupFormAvatar = new PopupWithForm({
+  selectorPopup: popupAvatarSelector,
+  selectorForm: '.popup__form',
+  selectorInput: '.popup__input',
+  submitCallback: (data) => {
+    api.setUserAvatar(data.url)
+    .then((user) => {
+      userInfo.setUserAvatar(data.url);
+    })
+    .catch(error => alert(error));
+  }
+});
+
+/**Открыть попап добавления карточки */
+popupButtonAvatar.addEventListener('click', () => {
+  popupFormAvatar.open();
+  resetValidationStyle(document.forms['avatar']);
 });
 
 /**------------------Карточки с изображением---------------------- */
@@ -206,3 +228,4 @@ profilePopup.setEventListeners();
 cardImagePopup.setEventListeners();
 popupFormAddCards.setEventListeners();
 cardDeletePopup.setEventListeners();
+popupFormAvatar.setEventListeners();

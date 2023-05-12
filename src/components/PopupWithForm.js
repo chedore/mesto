@@ -27,7 +27,8 @@ export default class PopupWithForm extends Popup {
   _saveProfileForm = (evt) => {
     evt.preventDefault();
     this._submitCallback(this._getInputValues());
-    this.close();    
+    this.close();
+       
   };
 
   setEventListeners() {

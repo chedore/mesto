@@ -65,7 +65,7 @@ export default class Api {
 
   /**Поставить лайк и отправить на сервер*/
   async setLikeUp(cardId) {
-    return await fetch(`${this._baseUrl}/cards/${cardId}/likes `, {
+    return await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
@@ -74,9 +74,22 @@ export default class Api {
 
   /**Удалить лайк и отправить на сервер*/
   async setLikeDown(cardId) {
-    return await fetch(`${this._baseUrl}/cards/${cardId}/likes `, {
+    return await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
+    })
+    .then(res => this._checkResponse(res));
+  }
+  
+  /**Изменить аватарку профиля*/
+  async setUserAvatar(url) {
+    console.log('!!!',url)
+    return await fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: url
+      })
     })
     .then(res => this._checkResponse(res));
   }
