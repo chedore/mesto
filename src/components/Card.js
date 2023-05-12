@@ -72,12 +72,10 @@ export default class Card {
     else {
       this._likeButton.classList.remove('element__info-button-active');
     }
-
   }
 
   /**поставиь лайк */
   _handleLikeClick() {
-    this._likeButton.classList.toggle('element__info-button-active');
     if (!this.checkLike()) {
       this._handleCardLikeUp(this.cardData._id);
     }
@@ -90,6 +88,7 @@ export default class Card {
   /**удалить карточку */
   handleBasketClick(){
     this._element.remove();
+    this._element = null;
   }
   
   _setEventListeners() {

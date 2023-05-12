@@ -116,6 +116,7 @@ const popupFormAvatar = new PopupWithForm({
     api.setUserAvatar(data.url)
     .then((user) => {
       userInfo.setUserAvatar(data.url);
+      popupFormAvatar.close();
     })
     .catch(error => alert(error))
     .finally(() => {
@@ -194,6 +195,7 @@ const profilePopup = new PopupWithForm({
     api.setInfolUser(data)
     .then(res => {
       userInfo.setUserInfo(res);
+      profilePopup.close();
     })
     .catch(error => alert(error))
     .finally(() => {
@@ -219,6 +221,7 @@ const popupFormAddCards = new PopupWithForm({
     api.addNewCard(data)
     .then(newCard => {
       defaultCardList.addItem( createCard(newCard) )
+      popupFormAddCards.close();
     })
     .catch(error => alert(error))
     .finally(() => {
