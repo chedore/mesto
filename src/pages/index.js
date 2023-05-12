@@ -43,8 +43,6 @@ let curentUserId;
 // Передаём массив с промисами методу Promise.all
 Promise.all(promises)
   .then(([user, cards]) => {
-    console.log('ok', cards)
-    console.log('user', {user})
     curentUserId = user._id;
     userInfo.setUserInfo(user);
     defaultCardList.renderItems(cards, curentUserId);
