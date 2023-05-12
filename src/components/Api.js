@@ -83,7 +83,6 @@ export default class Api {
   
   /**Изменить аватарку профиля*/
   async setUserAvatar(url) {
-    console.log('!!!',url)
     return await fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -93,5 +92,4 @@ export default class Api {
     })
     .then(res => this._checkResponse(res));
   }
-
 }

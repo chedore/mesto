@@ -114,11 +114,15 @@ const popupFormAvatar = new PopupWithForm({
   selectorForm: '.popup__form',
   selectorInput: '.popup__input',
   submitCallback: (data) => {
+    popupFormAvatar.renderPreloader(true, 'Сохранение...')
     api.setUserAvatar(data.url)
     .then((user) => {
       userInfo.setUserAvatar(data.url);
     })
-    .catch(error => alert(error));
+    .catch(error => alert(error))
+    .finally(() => {
+      popupFormAvatar.renderPreloader(false);
+    });
   }
 });
 
@@ -188,11 +192,15 @@ const profilePopup = new PopupWithForm({
   selectorForm: '.popup__form',
   selectorInput: '.popup__input',
   submitCallback: (data) => {
+    profilePopup.renderPreloader(true, 'Сохранение...')
     api.setInfolUser(data)
     .then(res => {
       userInfo.setUserInfo(res);
     })
-    .catch(error => alert(error));
+    .catch(error => alert(error))
+    .finally(() => {
+      profilePopup.renderPreloader(false);
+    });
   }
 });
 
@@ -209,11 +217,15 @@ const popupFormAddCards = new PopupWithForm({
   selectorForm: '.popup__form',
   selectorInput: '.popup__input',
   submitCallback: (data) => {
+    popupFormAddCards.renderPreloader(true, 'Сохранение...')
     api.addNewCard(data)
     .then(newCard => {
       defaultCardList.addItem( createCard(newCard) )
     })
-    .catch(error => alert(error));
+    .catch(error => alert(error))
+    .finally(() => {
+      popupFormAddCards.renderPreloader(false);
+    });
   }
 });
 

@@ -27,9 +27,21 @@ export default class PopupWithForm extends Popup {
   _saveProfileForm = (evt) => {
     evt.preventDefault();
     this._submitCallback(this._getInputValues());
-    this.close();
-       
+    this.close();   
   };
+  
+  // Функция отображения Preloader
+  renderPreloader(isLoading, displayText) {
+    this._buttonSubmit = document.querySelector('.popup__save-button'); 
+    
+    if (!this._buttonSubmit) return;
+    if (isLoading) {
+      this.defaulText = this._buttonSubmit.textContent;
+      this._buttonSubmit.textContent = displayText;
+    } else {
+      this._buttonSubmit.textContent = this.defaulText;
+    }
+  }
 
   setEventListeners() {
     super.setEventListeners();
